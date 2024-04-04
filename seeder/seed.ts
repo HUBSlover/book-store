@@ -16,6 +16,7 @@ const createProducts = async (quantity: number) => {
 			data: {
 				name: productName,
 				slug: faker.helpers.slugify(productName).toLowerCase(),
+				author: faker.person.fullName(),
 				description: faker.commerce.productDescription(),
 				price: +faker.commerce.price(10, 999, 0),
 				images: Array.from({

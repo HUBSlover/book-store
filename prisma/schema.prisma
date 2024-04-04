@@ -32,6 +32,7 @@ model Product {
 
   name String @unique
   slug String @unique
+  author String
   description String
   price Int
   images String[]
