@@ -14,7 +14,7 @@ import { NotFoundError } from 'rxjs'
 export class UserService {
 	constructor(private prisma: PrismaService) {}
 
-	async byId(id: number, selectObject: Prisma.UserSelect = {}) {
+	async byId(id: string, selectObject: Prisma.UserSelect = {}) {
 		const user = await this.prisma.user.findUnique({
 			where: {
 				id
@@ -41,7 +41,7 @@ export class UserService {
 		return user
 	}
 
-	async updateProfile(id: number, dto: UserDto) {
+	async updateProfile(id: string, dto: UserDto) {
 		const isSameUser = await this.prisma.user.findUnique({
 			where: { email: dto.email }
 		})
@@ -65,7 +65,7 @@ export class UserService {
 		})
 	}
 
-	async toggleFavorite(userId: number, productId: number) {
+	async toggleFavorite(userId: string, productId: string) {
 		const user = await this.byId(userId)
 
 		if (!user) throw new NotFoundException('User not found!')

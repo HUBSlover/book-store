@@ -31,7 +31,7 @@ export class CategoryController {
 	@Get(':id')
 	@Auth()
 	async getById(@Param('id') id: string) {
-		return this.categoryService.byId(+id)
+		return this.categoryService.byId(id)
 	}
 
 	@Auth()
@@ -41,18 +41,17 @@ export class CategoryController {
 		return this.categoryService.create()
 	}
 
-	@UsePipes(new ValidationPipe())
 	@Auth()
 	@HttpCode(200)
 	@Put(':id')
 	async update(@Param('id') id: string, @Body() dto: CategoryDto) {
-		return this.categoryService.update(+id, dto)
+		return this.categoryService.update(id, dto)
 	}
 
 	@HttpCode(200)
 	@Auth()
 	@Delete(':id')
 	async delete(@Param('categoryId') categoryId: string) {
-		return this.categoryService.delete(+categoryId)
+		return this.categoryService.delete(categoryId)
 	}
 }

@@ -18,12 +18,10 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 		})
 	}
 
-	async validate({
-		id
-	}): Promise<
+	async validate({ id }): Promise<
 		Pick<
 			{
-				id: number
+				id: string
 				createdAt: Date
 				updatedAt: Date
 				email: string
@@ -35,6 +33,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 			'id'
 		>
 	> {
-		return this.prisma.user.findUnique({ where: { id: +id } })
+		return this.prisma.user.findUnique({ where: { id: id } })
 	}
 }

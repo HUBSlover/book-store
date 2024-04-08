@@ -9,7 +9,7 @@ export class StatisticsService {
 		private userSevice: UserService
 	) {}
 
-	async getMain(userId: number) {
+	async getMain(userId: string) {
 		const user = await this.userSevice.byId(userId, {
 			orders: {
 				select: {

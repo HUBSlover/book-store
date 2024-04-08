@@ -17,7 +17,7 @@ export class ReviewService {
 		})
 	}
 
-	async create(userId: number, dto: ReviewDto, productId: number) {
+	async create(userId: string, dto: ReviewDto, productId: string) {
 		return this.prisma.review.create({
 			data: {
 				...dto,
@@ -35,11 +35,11 @@ export class ReviewService {
 		})
 	}
 
-	async getAverageValueByProductId(productId: number) {
+	async getAverageValueByProductId(productUuid: string) {
 		return this.prisma.review
 			.aggregate({
 				where: {
-					productId
+					productUuid
 				},
 				_avg: { rating: true }
 			})

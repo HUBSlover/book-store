@@ -8,7 +8,7 @@ datasource db {
 }
 
 model User {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -18,7 +18,7 @@ model User {
   name String @unique
   avatarPath String @default("/uploads/default-avatar.png") @map("avatar_path")
 
-  phone String @default("")
+  phone String @unique
   
   orders Order[]
   reviews Review[]
@@ -26,7 +26,7 @@ model User {
 }
 
 model Product {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -40,15 +40,15 @@ model Product {
   orderItems OrderItem[]
   reviews Review[]
 
-  category Category? @relation(fields: [categoryId], references: [id])
-  categoryId Int? @map("category_id")
+  category Category? @relation(fields: [categoryUuid], references: [id])
+  categoryUuid String? @map("category_uuid")
 
-  user User? @relation(fields: [userId], references: [id])
-  userId Int? @map("user_id")
+  user User? @relation(fields: [userUuid], references: [id])
+  userUuid String? @map("user_uuid")
 }
 
 model Category {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -59,22 +59,22 @@ model Category {
 }
 
 model Review {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   rating Int
   text String
   
-  user User @relation(fields: [userId], references: [id])
-  userId Int @map("user_id")
+  user User @relation(fields: [userUuid], references: [id])
+  userUuid String @map("user_uuid")
 
-  product Product @relation(fields: [productId], references: [id])
-  productId Int @map("product_id")
+  product Product @relation(fields: [productUuid], references: [id])
+  productUuid String @map("product_uuid")
 }
 
 model Order {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -82,23 +82,23 @@ model Order {
 
   items OrderItem[]
 
-  user User @relation(fields: [userId], references: [id])
-  userId Int @map("user_id")
+  user User @relation(fields: [userUuid], references: [id])
+  userUuid String @map("user_uuid")
 }
 
 model OrderItem {
-  id Int @id @default(autoincrement())
+  id String @id @unique @default(uuid())
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
   quantity Int
   price Int
 
-  order Order? @relation(fields: [orderId], references: [id])
-  orderId Int? @map("order_id")
+  order Order? @relation(fields: [orderUuid], references: [id])
+  orderUuid String? @map("order_uuid")
 
-  product Product? @relation(fields: [productId], references: [id])
-  productId Int @map("product_id")
+  product Product? @relation(fields: [productUuid], references: [id])
+  productUuid String @map("product_uuid")
 
   @@map("Oder_item")
 }

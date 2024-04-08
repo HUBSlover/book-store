@@ -9,7 +9,7 @@ export class OrderController {
 
 	@Get()
 	@Auth()
-	getAll(@CurrentUser('id') userId: number) {
+	getAll(@CurrentUser('id') userId: string) {
 		return this.orderService.getAll(userId)
 	}
 }

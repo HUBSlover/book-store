@@ -16,7 +16,6 @@ export class UserDto {
 	@IsString()
 	avatarPath: string
 
-	@IsOptional()
 	@IsString()
 	phone?: string
 }

@@ -9,7 +9,7 @@ export class StatisticsController {
 
 	@Get('main')
 	@Auth()
-	getMainStatistics(@CurrentUser('id') id: number) {
+	getMainStatistics(@CurrentUser('id') id: string) {
 		return this.statisticsService.getMain(id)
 	}
 }

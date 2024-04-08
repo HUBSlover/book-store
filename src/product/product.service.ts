@@ -73,7 +73,7 @@ export class ProductService {
 		}
 	}
 
-	async byId(id: number) {
+	async byId(id: string) {
 		const product = await this.prisma.product.findUnique({
 			where: {
 				id
@@ -88,7 +88,7 @@ export class ProductService {
 		return product
 	}
 
-	async update(id: number, dto: ProductDto) {
+	async update(id: string, dto: ProductDto) {
 		const { description, images, price, name, author, categoryId } = dto
 
 		return this.prisma.product.update({
@@ -123,7 +123,7 @@ export class ProductService {
 		})
 	}
 
-	async delete(id: number) {
+	async delete(id: string) {
 		return this.prisma.product.delete({
 			where: {
 				id
@@ -131,39 +131,43 @@ export class ProductService {
 		})
 	}
 
-	async bySlug(slug: string) {
-		const product = await this.prisma.product.findUnique({
-			where: {
-				slug
-			},
-			select: productReturnObjectFullest
-		})
+	/*DEPRECATED*/
 
-		if (!product) {
-			throw new NotFoundException('Product not found!')
-		}
+	// async bySlug(slug: string) {
+	// 	const product = await this.prisma.product.findUnique({
+	// 		where: {
+	// 			slug
+	// 		},
+	// 		select: productReturnObjectFullest
+	// 	})
 
-		return product
-	}
+	// 	if (!product) {
+	// 		throw new NotFoundException('Product not found!')
+	// 	}
 
-	async byCategory(categorySlug: string) {
-		const products = await this.prisma.product.findMany({
-			where: {
-				category: {
-					slug: categorySlug
-				}
-			},
-			select: productReturnObjectFullest
-		})
+	// 	return product
+	// }
 
-		if (!products) {
-			throw new NotFoundException('Product not found!')
-		}
+	// async byCategory(categorySlug: string) {
+	// 	const products = await this.prisma.product.findMany({
+	// 		where: {
+	// 			category: {
+	// 				slug: categorySlug
+	// 			}
+	// 		},
+	// 		select: productReturnObjectFullest
+	// 	})
 
-		return products
-	}
+	// 	if (!products) {
+	// 		throw new NotFoundException('Product not found!')
+	// 	}
 
-	async getSimilar(id: number) {
+	// 	return products
+	// }
+
+	/*DEPRECATED*/
+
+	async getSimilar(id: string) {
 		const currentProduct = await this.byId(id)
 
 		if (!currentProduct) throw new NotFoundException('Current product not found!')

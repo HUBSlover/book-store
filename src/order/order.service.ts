@@ -5,10 +5,10 @@ import { PrismaService } from 'src/prisma.service'
 export class OrderService {
 	constructor(private prisma: PrismaService) {}
 
-	async getAll(userId: number) {
+	async getAll(userUuid: string) {
 		return this.prisma.order.findMany({
 			where: {
-				userId
+				userUuid
 			},
 			orderBy: {
 				createdAt: 'desc'

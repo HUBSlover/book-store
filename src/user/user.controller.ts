@@ -21,15 +21,14 @@ export class UserController {
 
 	@Get('profile')
 	@Auth()
-	async getProfile(@CurrentUser('id') id: number) {
+	async getProfile(@CurrentUser('id') id: string) {
 		return this.userService.byId(id)
 	}
 
-	@UsePipes(new ValidationPipe())
 	@Auth()
 	@HttpCode(200)
 	@Put('profile')
-	async getNewTokens(@CurrentUser('id') id: number, @Body() dto: UserDto) {
+	async getNewTokens(@CurrentUser('id') id: string, @Body() dto: UserDto) {
 		return this.userService.updateProfile(id, dto)
 	}
 
@@ -37,9 +36,9 @@ export class UserController {
 	@Auth()
 	@Patch('profile/favorites/:productId')
 	async toggleFavorite(
-		@CurrentUser('id') id: number,
+		@CurrentUser('id') id: string,
 		@Param('productId') productId: string
 	) {
-		return this.userService.toggleFavorite(id, +productId)
+		return this.userService.toggleFavorite(id, productId)
 	}
 }
