@@ -5,27 +5,23 @@ import {
 	HttpCode,
 	Param,
 	Patch,
-	Post,
-	Put,
-	UsePipes,
-	ValidationPipe
+	Put
 } from '@nestjs/common'
-import { UserService } from './user.service'
-import { Auth } from 'src/auth/decorators/auth.decorator'
 import { CurrentUser } from 'src/auth/decorators/user.decorator'
 import { UserDto } from './user.dto'
+import { UserService } from './user.service'
 
 @Controller('users')
 export class UserController {
 	constructor(private readonly userService: UserService) {}
 
 	@Get('profile')
-	@Auth()
+	//@Auth()
 	async getProfile(@CurrentUser('id') id: string) {
 		return this.userService.byId(id)
 	}
 
-	@Auth()
+	//@Auth()
 	@HttpCode(200)
 	@Put('profile')
 	async getNewTokens(@CurrentUser('id') id: string, @Body() dto: UserDto) {
@@ -33,7 +29,7 @@ export class UserController {
 	}
 
 	@HttpCode(200)
-	@Auth()
+	//@Auth()
 	@Patch('profile/favorites/:productId')
 	async toggleFavorite(
 		@CurrentUser('id') id: string,

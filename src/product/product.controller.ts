@@ -28,21 +28,21 @@ export class ProductController {
 		return this.productService.getSimilar(id)
 	}
 
-	@Get('by-slug/:slug')
-	async getProductBySlug(@Param('slug') slug: string) {
-		return this.productService.bySlug(slug)
-	}
+	// @Get('by-slug/:slug')
+	// async getProductBySlug(@Param('slug') slug: string) {
+	// 	return this.productService.bySlug(slug)
+	// }
 
-	@Get('by-category/:categorySlug')
-	async getProductsByCategory(
-		@Param('categorySlug')
-		categorySlug: string
-	) {
-		return this.productService.byCategory(categorySlug)
-	}
+	// @Get('by-category/:categorySlug')
+	// async getProductsByCategory(
+	// 	@Param('categorySlug')
+	// 	categorySlug: string
+	// ) {
+	// 	return this.productService.byCategory(categorySlug)
+	// }
 
 	@HttpCode(200)
-	@Auth()
+	//@Auth()
 	@Post()
 	async createProduct() {
 		return this.productService.create()
@@ -50,14 +50,14 @@ export class ProductController {
 
 	@HttpCode(200)
 	@Put('id')
-	@Auth()
+	//@Auth()
 	async updateProduct(@Param('id') id: string, @Body() dto: ProductDto) {
 		return this.productService.update(id, dto)
 	}
 
 	@HttpCode(200)
 	@Delete(':id')
-	@Auth()
+	//@Auth()
 	async deleteProduct(@Param('id') id: string) {
 		return this.productService.delete(id)
 	}

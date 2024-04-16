@@ -29,19 +29,19 @@ export class CategoryController {
 	}
 
 	@Get(':id')
-	@Auth()
+	//@Auth()
 	async getById(@Param('id') id: string) {
 		return this.categoryService.byId(id)
 	}
 
-	@Auth()
+	//@Auth()
 	@HttpCode(200)
 	@Post()
 	async create() {
 		return this.categoryService.create()
 	}
 
-	@Auth()
+	//@Auth()
 	@HttpCode(200)
 	@Put(':id')
 	async update(@Param('id') id: string, @Body() dto: CategoryDto) {
@@ -49,7 +49,7 @@ export class CategoryController {
 	}
 
 	@HttpCode(200)
-	@Auth()
+	//@Auth()
 	@Delete(':id')
 	async delete(@Param('categoryId') categoryId: string) {
 		return this.categoryService.delete(categoryId)

@@ -24,12 +24,17 @@ export class ReviewController {
 
 	@HttpCode(200)
 	@Post('leave/:productId')
-	@Auth()
+	//@Auth()
 	async leaveReview(
 		@CurrentUser('id') id: string,
 		@Body() dto: ReviewDto,
 		@Param('productId') productId: string
 	) {
 		return this.reviewService.create(id, dto, productId)
+	}
+
+	@Get('average-by-product/:productId')
+	async getAverageByProduct(@Param('productId') productId: string) {
+		return this.reviewService.getAverageValueByProductId(productId)
 	}
 }

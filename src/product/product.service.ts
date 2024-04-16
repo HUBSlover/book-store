@@ -62,7 +62,8 @@ export class ProductService {
 			where: prismaSearchTermFilter,
 			orderBy: prismaSort,
 			skip,
-			take: perPage
+			take: perPage,
+			select: productReturnObject
 		})
 
 		return {
@@ -170,7 +171,8 @@ export class ProductService {
 	async getSimilar(id: string) {
 		const currentProduct = await this.byId(id)
 
-		if (!currentProduct) throw new NotFoundException('Current product not found!')
+		if (!currentProduct)
+			throw new NotFoundException('Current product not found!')
 
 		const products = await this.prisma.product.findMany({
 			where: {
