@@ -66,6 +66,8 @@ export class ProductService {
 			select: productReturnObject
 		})
 
+		console.log(products)
+
 		return {
 			products,
 			length: await this.prisma.product.count({
